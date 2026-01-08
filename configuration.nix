@@ -26,6 +26,10 @@
   services.openssh.enable = true;
   services.glances.enable = true;
 
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
   services.nginx = {
     enable = true;
     virtualHosts."ario-test.fllstck.dev" = {
