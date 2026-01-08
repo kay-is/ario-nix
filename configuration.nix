@@ -30,14 +30,21 @@
     80
     443
   ];
+
+  security.acme = {
+    acceptTerms = true;
+  };
+
   services.nginx = {
     enable = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
     virtualHosts."ario-test.fllstck.dev" = {
+      enableACME = true;
+      forceSSL = true;
       locations."/" = {
-        return = "200 '<html><body>It works</body></html>'";
-        extraConfig = ''
-          default_type text/html;
-        '';
+        proxyPass = "http://localhost:3000";
+        proxyWebsockets = true;
       };
     };
   };
