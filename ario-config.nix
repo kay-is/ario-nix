@@ -20,32 +20,6 @@
   virtualisation.oci-containers.backend = "podman";
 
   # Containers
-  virtualisation.oci-containers.containers."ar-io-node-autoheal" = {
-    image = "willfarrell/autoheal@sha256:fd2c5500ab9210be9fa0d365162301eb0d16923f1d9a36de887f5d1751c6eb8c";
-    environment = {
-      "AUTOHEAL_CONTAINER_LABEL" = "autoheal";
-      "AUTOHEAL_ONLY_MONITOR_RUNNING" = "false";
-    };
-    volumes = [
-      "/etc/localtime:/etc/localtime:ro"
-      "/var/run/docker.sock:/var/run/docker.sock:rw"
-    ];
-    log-driver = "journald";
-    extraOptions = [
-      "--network=none"
-    ];
-  };
-  systemd.services."podman-ar-io-node-autoheal" = {
-    serviceConfig = {
-      Restart = lib.mkOverride 90 "always";
-    };
-    partOf = [
-      "podman-compose-ar-io-node-root.target"
-    ];
-    wantedBy = [
-      "podman-compose-ar-io-node-root.target"
-    ];
-  };
   virtualisation.oci-containers.containers."ar-io-node-core" = {
     image = "localhost/ghcr.io/ar-io/ar-io-core:latest";
     environment = {
@@ -261,9 +235,6 @@
     ports = [
       "4000:4000/tcp"
     ];
-    labels = {
-      "autoheal" = "false";
-    };
     dependsOn = [
       "ar-io-node-redis"
     ];
