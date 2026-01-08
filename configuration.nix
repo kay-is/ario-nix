@@ -10,6 +10,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
     ./proxy-config.nix
+    ./ario-config.nix
   ];
 
   boot.loader.grub = {
@@ -23,7 +24,6 @@
     pkgs.curl
   ];
 
-  virtualisation.docker.enable = true;
   services.openssh.enable = true;
   services.glances.enable = true;
 
