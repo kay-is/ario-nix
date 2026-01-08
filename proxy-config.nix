@@ -28,10 +28,12 @@
     virtualHosts."permaframes.cc" = {
       enableACME = true;
       forceSSL = true;
+
       locations."/" = {
         proxyPass = "http://localhost:3000";
         proxyWebsockets = true;
       };
+
       locations."/grafana/" = {
         proxyPass = "http://localhost:1024/grafana";
         proxyWebsockets = true;
@@ -39,8 +41,9 @@
           users = {
             "admin" = "permaframes123";
           };
-        }
+        };
       };
+
       locations."/glances/" = {
         proxyPass = "http://localhost:61208";
         proxyWebsockets = true;
@@ -48,7 +51,7 @@
           users = {
             "admin" = "permaframes123";
           };
-        }
+        };
       };
     };
   };
