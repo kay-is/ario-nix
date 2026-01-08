@@ -33,13 +33,29 @@
 
   security.acme = {
     acceptTerms = true;
+    defaults = {
+      group = "nginx";
+
+      dnsProvider = "cloudflare";
+      dnsResolver = "1.1.1.1:53";
+      credentialFiles = {
+        "CF_DNS_API_TOKEN_FILE" = "/root/cf-token.ini";
+      };
+      dnsPropagationCheck = true;
+
+      email = "fllstck@pm.me";
+    };
+
+    certs."permaframes.cc" = {
+      extraDomainNames = [ "*.permaframes.cc" ];
+    };
   };
 
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
-    virtualHosts."ario-test.fllstck.dev" = {
+    virtualHosts."permaframes.cc" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
