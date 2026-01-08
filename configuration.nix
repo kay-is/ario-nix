@@ -28,7 +28,7 @@
 
   services.nginx = {
     enable = true;
-    virtualHosts.localhost = {
+    virtualHosts."ario-test.fllstck.dev" = {
       locations."/" = {
         return = "200 '<html><body>It works</body></html>'";
         extraConfig = ''
