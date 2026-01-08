@@ -24,8 +24,19 @@
 
   virtualisation.docker.enable = true;
   services.openssh.enable = true;
-  services.nginx.enable = true;
   services.glances.enable = true;
+
+  services.nginx = {
+    enable = true;
+    virtualHosts.localhost = {
+      locations."/" = {
+        return = "200 '<html><body>It works</body></html>'";
+        extraConfig = ''
+          default_type text/html;
+        '';
+      };
+    };
+  };
 
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUgE09xB2WSFpuow24yGsgPoLaEVMFfYC+/S5p+mS69 k@k-lg-gram"
