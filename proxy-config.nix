@@ -38,9 +38,7 @@
         proxyPass = "http://localhost:1024/grafana";
         proxyWebsockets = true;
         basicAuth = {
-          users = {
-            "admin" = "permaframes123";
-          };
+          admin = "permaframes123";
         };
       };
 
@@ -48,9 +46,7 @@
         proxyPass = "http://localhost:61208";
         proxyWebsockets = true;
         basicAuth = {
-          users = {
-            "admin" = "permaframes123";
-          };
+          admin = "permaframes123";
         };
       };
     };
