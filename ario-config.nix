@@ -27,8 +27,34 @@
   virtualisation.oci-containers.backend = "podman";
 
   # Containers
+  virtualisation.oci-containers.containers."ar-io-node-autoheal" = {
+    image = "willfarrell/autoheal@sha256:fd2c5500ab9210be9fa0d365162301eb0d16923f1d9a36de887f5d1751c6eb8c";
+    environment = {
+      "AUTOHEAL_CONTAINER_LABEL" = "autoheal";
+      "AUTOHEAL_ONLY_MONITOR_RUNNING" = "false";
+    };
+    volumes = [
+      "/etc/localtime:/etc/localtime:ro"
+      "/var/run/docker.sock:/var/run/docker.sock:rw"
+    ];
+    log-driver = "journald";
+    extraOptions = [
+      "--network=none"
+    ];
+  };
+  systemd.services."podman-ar-io-node-autoheal" = {
+    serviceConfig = {
+      Restart = lib.mkOverride 90 "always";
+    };
+    partOf = [
+      "podman-compose-ar-io-node-root.target"
+    ];
+    wantedBy = [
+      "podman-compose-ar-io-node-root.target"
+    ];
+  };
   virtualisation.oci-containers.containers."ar-io-node-core" = {
-    image = "localhost/ghcr.io/ar-io/ar-io-core:latest";
+    image = "ghcr.io/ar-io/ar-io-core:ac6dc46881a29cd1d39ab0466e2bf219dc2a363c";
     environment = {
       "ADMIN_API_KEY" = "";
       "ANS104_DOWNLOAD_WORKERS" = "";
@@ -62,7 +88,7 @@
       "ARWEAVE_NODE_IGNORE_URLS" = "";
       "ARWEAVE_POST_DRY_RUN" = "false";
       "ARWEAVE_POST_DRY_RUN_SKIP_VALIDATION" = "false";
-      "AR_IO_NODE_RELEASE" = "65-pre";
+      "AR_IO_NODE_RELEASE" = "64";
       "AR_IO_SDK_LOG_LEVEL" = "none";
       "AR_IO_WALLET" = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
       "AWS_ACCESS_KEY_ID" = "";
@@ -242,6 +268,9 @@
     ports = [
       "4000:4000/tcp"
     ];
+    labels = {
+      "autoheal" = "false";
+    };
     dependsOn = [
       "ar-io-node-redis"
     ];
@@ -269,7 +298,7 @@
     ];
   };
   virtualisation.oci-containers.containers."ar-io-node-envoy" = {
-    image = "localhost/ghcr.io/ar-io/ar-io-envoy:latest";
+    image = "ghcr.io/ar-io/ar-io-envoy:4755fa0a2deb258bfaeaa91ba3154f1f7ef41fda";
     environment = {
       "LOG_LEVEL" = "info";
       "TVAL_ARNS_ROOT_HOST" = "permaframes.cc";
@@ -324,7 +353,7 @@
       "AO_GATEWAY_URL" = "";
       "AO_GRAPHQL_URL" = "";
       "AO_MU_URL" = "";
-      "AR_IO_NODE_RELEASE" = "65-pre";
+      "AR_IO_NODE_RELEASE" = "64";
       "AR_IO_SDK_LOG_LEVEL" = "none";
       "IO_PROCESS_ID" = "";
       "LOG_LEVEL" = "";
@@ -426,36 +455,6 @@
     '';
     partOf = [ "podman-compose-ar-io-node-root.target" ];
     wantedBy = [ "podman-compose-ar-io-node-root.target" ];
-  };
-
-  # Builds
-  systemd.services."podman-build-ar-io-node-core" = {
-    path = [
-      pkgs.podman
-      pkgs.git
-    ];
-    serviceConfig = {
-      Type = "oneshot";
-      TimeoutSec = 300;
-    };
-    script = ''
-      cd /home/k/Development/ario-gw-nix
-      podman build -t ghcr.io/ar-io/ar-io-core:latest .
-    '';
-  };
-  systemd.services."podman-build-ar-io-node-envoy" = {
-    path = [
-      pkgs.podman
-      pkgs.git
-    ];
-    serviceConfig = {
-      Type = "oneshot";
-      TimeoutSec = 300;
-    };
-    script = ''
-      cd /root/envoy
-      podman build -t ghcr.io/ar-io/ar-io-envoy:latest .
-    '';
   };
 
   # Root service
