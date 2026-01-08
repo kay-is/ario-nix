@@ -13,22 +13,23 @@
 
   boot.loader.grub = {
     # disko will add all devices that have a EF02 partition to the list already
-    # devices = [ ]; 
+    # devices = [ ];
     efiSupport = true;
     efiInstallAsRemovable = true;
   };
-  
+
   environment.systemPackages = map lib.lowPrio [
     pkgs.curl
   ];
 
   virtualisation.docker.enable = true;
-  services.openssh.enable = true;  
+  services.openssh.enable = true;
   services.nginx.enable = true;
   services.glances.enable = true;
 
-
-  users.users.root.openssh.authorizedKeys.keys = []
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUgE09xB2WSFpuow24yGsgPoLaEVMFfYC+/S5p+mS69 k@k-lg-gram"
+  ];
 
   system.stateVersion = "24.05";
 }
