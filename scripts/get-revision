@@ -1,0 +1,19 @@
+#!/bin/bash
+
+revision=$1
+
+if [ -z "$revision" ]; then
+  echo "Usage: $0 <revision>"
+  echo "Example: $0 r64"
+  exit 1
+fi
+
+composeUrl="https://raw.githubusercontent.com/ar-io/ar-io-node/refs/tags/$revision/docker-compose.yaml"
+
+curl -L -o docker-compose.yml "$composeUrl"
+
+nix run github:aksiksi/compose2nix -- \
+  --project=ario \
+  --runtime=docker \
+  --inputs=docker-compose.yml \
+  --output=modules/ario-config.nix

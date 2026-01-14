@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
   networking.firewall.allowedTCPPorts = [
     80
@@ -10,23 +10,28 @@
     defaults = {
       group = "nginx";
 
+      email = "fllstck@pm.me";
+      dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;
 
-      email = "fllstck@pm.me";
+      reloadServices = [ "nginx" ];
     };
 
     certs."permaframes.cc" = {
+      domain = "permaframes.cc";
       extraDomainNames = [ "*.permaframes.cc" ];
+      credentialsFile = "/root/cf-token";
     };
   };
 
   services.nginx = {
     enable = true;
+
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     virtualHosts."permaframes.cc" = {
-      enableACME = true;
+      useACMEHost = "permaframes.cc";
       forceSSL = true;
 
       locations."/" = {

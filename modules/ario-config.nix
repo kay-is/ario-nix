@@ -11,7 +11,7 @@
   virtualisation.oci-containers.backend = "docker";
 
   # Containers
-  virtualisation.oci-containers.containers."ar-io-node-autoheal" = {
+  virtualisation.oci-containers.containers."ario-autoheal" = {
     image = "willfarrell/autoheal@sha256:fd2c5500ab9210be9fa0d365162301eb0d16923f1d9a36de887f5d1751c6eb8c";
     environment = {
       "AUTOHEAL_CONTAINER_LABEL" = "autoheal";
@@ -26,7 +26,7 @@
       "--network=none"
     ];
   };
-  systemd.services."docker-ar-io-node-autoheal" = {
+  systemd.services."docker-ario-autoheal" = {
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
       RestartMaxDelaySec = lib.mkOverride 90 "1m";
@@ -34,13 +34,13 @@
       RestartSteps = lib.mkOverride 90 9;
     };
     partOf = [
-      "docker-compose-ar-io-node-root.target"
+      "docker-compose-ario-root.target"
     ];
     wantedBy = [
-      "docker-compose-ar-io-node-root.target"
+      "docker-compose-ario-root.target"
     ];
   };
-  virtualisation.oci-containers.containers."ar-io-node-core" = {
+  virtualisation.oci-containers.containers."ario-core" = {
     image = "ghcr.io/ar-io/ar-io-core:ac6dc46881a29cd1d39ab0466e2bf219dc2a363c";
     environment = {
       "ADMIN_API_KEY" = "";
@@ -71,13 +71,13 @@
       "ARNS_RESOLVER_ENFORCE_UNDERNAME_LIMIT" = "";
       "ARNS_RESOLVER_OVERRIDE_TTL_SECONDS" = "";
       "ARNS_RESOLVER_PRIORITY_ORDER" = "";
-      "ARNS_ROOT_HOST" = "permaframes.cc";
+      "ARNS_ROOT_HOST" = "";
       "ARWEAVE_NODE_IGNORE_URLS" = "";
       "ARWEAVE_POST_DRY_RUN" = "false";
       "ARWEAVE_POST_DRY_RUN_SKIP_VALIDATION" = "false";
       "AR_IO_NODE_RELEASE" = "64";
       "AR_IO_SDK_LOG_LEVEL" = "none";
-      "AR_IO_WALLET" = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+      "AR_IO_WALLET" = "";
       "AWS_ACCESS_KEY_ID" = "";
       "AWS_DYNAMODB_TURBO_ASSUME_ROLE_ARN" = "";
       "AWS_DYNAMODB_TURBO_DATA_ITEM_TABLE" = "";
@@ -130,7 +130,7 @@
       "CLICKHOUSE_PASSWORD" = "";
       "CLICKHOUSE_URL" = "";
       "CLICKHOUSE_USER" = "";
-      "CONTIGUOUS_DATA_CACHE_CLEANUP_THRESHOLD" = "86400";
+      "CONTIGUOUS_DATA_CACHE_CLEANUP_THRESHOLD" = "";
       "DATA_ITEM_FLUSH_COUNT_THRESHOLD" = "";
       "ENABLE_BACKGROUND_DATA_VERIFICATION" = "";
       "ENABLE_CHUNK_SYMLINK_CLEANUP" = "";
@@ -240,17 +240,17 @@
       "X_402_USDC_WALLET_ADDRESS" = "";
     };
     volumes = [
-      "/root/data/cdb64-root-tx-index:/app/data/cdb64-root-tx-index:rw"
-      "/root/data/chunks:/app/data/chunks:rw"
-      "/root/data/contiguous:/app/data/contiguous:rw"
-      "/root/data/datasets:/app/data/datasets:rw"
-      "/root/data/duckdb:/app/data/duckdb:rw"
-      "/root/data/headers:/app/data/headers:rw"
-      "/root/data/lmdb:/app/data/lmdb:rw"
-      "/root/data/parquet:/app/data/parquet:rw"
-      "/root/data/sqlite:/app/data/sqlite:rw"
-      "/root/data/tmp:/app/data/tmp:rw"
-      "/root/secrets:/app/secrets:ro"
+      "/home/k/Development/ario-gw-nix/data/cdb64-root-tx-index:/app/data/cdb64-root-tx-index:rw"
+      "/home/k/Development/ario-gw-nix/data/chunks:/app/data/chunks:rw"
+      "/home/k/Development/ario-gw-nix/data/contiguous:/app/data/contiguous:rw"
+      "/home/k/Development/ario-gw-nix/data/datasets:/app/data/datasets:rw"
+      "/home/k/Development/ario-gw-nix/data/duckdb:/app/data/duckdb:rw"
+      "/home/k/Development/ario-gw-nix/data/headers:/app/data/headers:rw"
+      "/home/k/Development/ario-gw-nix/data/lmdb:/app/data/lmdb:rw"
+      "/home/k/Development/ario-gw-nix/data/parquet:/app/data/parquet:rw"
+      "/home/k/Development/ario-gw-nix/data/sqlite:/app/data/sqlite:rw"
+      "/home/k/Development/ario-gw-nix/data/tmp:/app/data/tmp:rw"
+      "/home/k/Development/ario-gw-nix/secrets:/app/secrets:ro"
     ];
     ports = [
       "4000:4000/tcp"
@@ -259,7 +259,7 @@
       "autoheal" = "false";
     };
     dependsOn = [
-      "ar-io-node-redis"
+      "ario-redis"
     ];
     log-driver = "journald";
     extraOptions = [
@@ -267,7 +267,7 @@
       "--network=ar-io-network"
     ];
   };
-  systemd.services."docker-ar-io-node-core" = {
+  systemd.services."docker-ario-core" = {
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
       RestartMaxDelaySec = lib.mkOverride 90 "1m";
@@ -281,17 +281,17 @@
       "docker-network-ar-io-network.service"
     ];
     partOf = [
-      "docker-compose-ar-io-node-root.target"
+      "docker-compose-ario-root.target"
     ];
     wantedBy = [
-      "docker-compose-ar-io-node-root.target"
+      "docker-compose-ario-root.target"
     ];
   };
-  virtualisation.oci-containers.containers."ar-io-node-envoy" = {
+  virtualisation.oci-containers.containers."ario-envoy" = {
     image = "ghcr.io/ar-io/ar-io-envoy:4755fa0a2deb258bfaeaa91ba3154f1f7ef41fda";
     environment = {
       "LOG_LEVEL" = "info";
-      "TVAL_ARNS_ROOT_HOST" = "permaframes.cc";
+      "TVAL_ARNS_ROOT_HOST" = "";
       "TVAL_ARWEAVE_POST_DRY_RUN" = "false";
       "TVAL_AR_IO_HOST" = "core";
       "TVAL_AR_IO_PORT" = "4000";
@@ -310,8 +310,8 @@
       "3000:3000/tcp"
     ];
     dependsOn = [
-      "ar-io-node-core"
-      "ar-io-node-observer"
+      "ario-core"
+      "ario-observer"
     ];
     log-driver = "journald";
     extraOptions = [
@@ -319,7 +319,7 @@
       "--network=ar-io-network"
     ];
   };
-  systemd.services."docker-ar-io-node-envoy" = {
+  systemd.services."docker-ario-envoy" = {
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
       RestartMaxDelaySec = lib.mkOverride 90 "1m";
@@ -333,13 +333,13 @@
       "docker-network-ar-io-network.service"
     ];
     partOf = [
-      "docker-compose-ar-io-node-root.target"
+      "docker-compose-ario-root.target"
     ];
     wantedBy = [
-      "docker-compose-ar-io-node-root.target"
+      "docker-compose-ario-root.target"
     ];
   };
-  virtualisation.oci-containers.containers."ar-io-node-observer" = {
+  virtualisation.oci-containers.containers."ario-observer" = {
     image = "ghcr.io/ar-io/ar-io-observer:e34a7f01768d505360a4e0877fe40d55230e864a";
     environment = {
       "AO_CU_URL" = "";
@@ -353,18 +353,18 @@
       "MIN_RELEASE_NUMBER" = "0";
       "NETWORK_AO_CU_URL" = "";
       "NUM_ARNS_NAMES_TO_OBSERVE_PER_GROUP" = "8";
-      "OBSERVER_WALLET" = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+      "OBSERVER_WALLET" = "";
       "REPORT_DATA_SINK" = "";
       "REPORT_GENERATION_INTERVAL_MS" = "";
-      "RUN_OBSERVER" = "false";
+      "RUN_OBSERVER" = "true";
       "SUBMIT_CONTRACT_INTERACTIONS" = "true";
       "TURBO_UPLOAD_SERVICE_URL" = "";
     };
     volumes = [
-      "/root/data/observer:/app/data/observer:rw"
-      "/root/data/reports:/app/data/reports:rw"
-      "/root/data/tmp:/app/data/tmp:rw"
-      "/root/wallets:/app/wallets:rw"
+      "/home/k/Development/ario-gw-nix/data/observer:/app/data/observer:rw"
+      "/home/k/Development/ario-gw-nix/data/reports:/app/data/reports:rw"
+      "/home/k/Development/ario-gw-nix/data/tmp:/app/data/tmp:rw"
+      "/home/k/Development/ario-gw-nix/wallets:/app/wallets:rw"
     ];
     ports = [
       "5050:5050/tcp"
@@ -375,7 +375,7 @@
       "--network=ar-io-network"
     ];
   };
-  systemd.services."docker-ar-io-node-observer" = {
+  systemd.services."docker-ario-observer" = {
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
       RestartMaxDelaySec = lib.mkOverride 90 "1m";
@@ -389,38 +389,28 @@
       "docker-network-ar-io-network.service"
     ];
     partOf = [
-      "docker-compose-ar-io-node-root.target"
+      "docker-compose-ario-root.target"
     ];
     wantedBy = [
-      "docker-compose-ar-io-node-root.target"
+      "docker-compose-ario-root.target"
     ];
   };
-  virtualisation.oci-containers.containers."ar-io-node-redis" = {
+  virtualisation.oci-containers.containers."ario-redis" = {
     image = "redis:7";
     volumes = [
-      "/root/data/redis:/data:rw"
+      "/home/k/Development/ario-gw-nix/data/redis:/data:rw"
     ];
     ports = [
       "6379/tcp"
     ];
-    cmd = [
-      "redis-server"
-      "--maxmemory"
-      "256mb"
-      "--maxmemory-policy"
-      "allkeys-lru"
-      "--save"
-      ""
-      "--appendonly"
-      "no"
-    ];
+    cmd = [ "redis-server" "--maxmemory" "256mb" "--maxmemory-policy" "allkeys-lru" "--save" "" "--appendonly" "no" ];
     log-driver = "journald";
     extraOptions = [
       "--network-alias=redis"
       "--network=ar-io-network"
     ];
   };
-  systemd.services."docker-ar-io-node-redis" = {
+  systemd.services."docker-ario-redis" = {
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
       RestartMaxDelaySec = lib.mkOverride 90 "1m";
@@ -434,10 +424,10 @@
       "docker-network-ar-io-network.service"
     ];
     partOf = [
-      "docker-compose-ar-io-node-root.target"
+      "docker-compose-ario-root.target"
     ];
     wantedBy = [
-      "docker-compose-ar-io-node-root.target"
+      "docker-compose-ario-root.target"
     ];
   };
 
@@ -452,14 +442,38 @@
     script = ''
       docker network inspect ar-io-network || docker network create ar-io-network
     '';
-    partOf = [ "docker-compose-ar-io-node-root.target" ];
-    wantedBy = [ "docker-compose-ar-io-node-root.target" ];
+    partOf = [ "docker-compose-ario-root.target" ];
+    wantedBy = [ "docker-compose-ario-root.target" ];
+  };
+
+  # Builds
+  systemd.services."docker-build-ario-core" = {
+    path = [ pkgs.docker pkgs.git ];
+    serviceConfig = {
+      Type = "oneshot";
+      TimeoutSec = 300;
+    };
+    script = ''
+      cd /home/k/Development/ario-gw-nix
+      docker build -t ghcr.io/ar-io/ar-io-core:ac6dc46881a29cd1d39ab0466e2bf219dc2a363c .
+    '';
+  };
+  systemd.services."docker-build-ario-envoy" = {
+    path = [ pkgs.docker pkgs.git ];
+    serviceConfig = {
+      Type = "oneshot";
+      TimeoutSec = 300;
+    };
+    script = ''
+      cd /home/k/Development/ario-gw-nix/envoy
+      docker build -t ghcr.io/ar-io/ar-io-envoy:4755fa0a2deb258bfaeaa91ba3154f1f7ef41fda .
+    '';
   };
 
   # Root service
   # When started, this will automatically create all resources and start
   # the containers. When stopped, this will teardown all resources.
-  systemd.targets."docker-compose-ar-io-node-root" = {
+  systemd.targets."docker-compose-ario-root" = {
     unitConfig = {
       Description = "Root target generated by compose2nix.";
     };

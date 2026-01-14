@@ -1,0 +1,16 @@
+#!/bin/bash
+
+node=$1
+
+if [ -z "$node" ]; then
+  echo "Usage: $0 <node>"
+  echo "Example: $0 my-node"
+  exit 1
+fi
+
+
+
+nix run github:nix-community/nixos-anywhere -- \
+  --flake ".#ario" \
+  --generate-hardware-config nixos-generate-config ./hardware-configuration.nix \
+  "$node"

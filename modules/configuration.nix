@@ -1,4 +1,5 @@
 {
+  self,
   modulesPath,
   lib,
   pkgs,
@@ -9,8 +10,9 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
-    ./proxy-config.nix
     ./ario-config.nix
+    ./proxy-config.nix
+    ../vals.nix
   ];
 
   boot.loader.grub = {
@@ -27,9 +29,11 @@
   services.openssh.enable = true;
   services.glances.enable = true;
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUgE09xB2WSFpuow24yGsgPoLaEVMFfYC+/S5p+mS69 k@k-lg-gram"
-  ];
+  virtualisation.oci-containers.containers."ario-core" = {
+    environment = self.vals.environment;
+  };
+
+  users.users.root.openssh.authorizedKeys.keys = self.vals.sshKeys;
 
   system.stateVersion = "24.05";
 }

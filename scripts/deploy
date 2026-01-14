@@ -1,0 +1,16 @@
+#!/bin/bash
+
+node=$1
+
+if [ -z "$node" ]; then
+  echo "Usage: $0 <node>"
+  echo "Example: $0 my-node"
+  exit 1
+fi
+
+if [ ! -f "modules/ario-config.nix" ]; then
+  echo "Error: modules/ario-config.nix missing. Please run the get-revision script first."
+  exit 1
+fi
+
+nix run github:szlend/deploy-rs/fix-show-derivation-parsing -- ".#$node"
