@@ -1,4 +1,4 @@
-{ ... }:
+{ vals, ... }:
 {
   networking.firewall.allowedTCPPorts = [
     80
@@ -10,7 +10,7 @@
     defaults = {
       group = "nginx";
 
-      email = "fllstck@pm.me";
+      email = vals.domainEmail;
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;
@@ -18,9 +18,9 @@
       reloadServices = [ "nginx" ];
     };
 
-    certs."permaframes.cc" = {
-      domain = "permaframes.cc";
-      extraDomainNames = [ "*.permaframes.cc" ];
+    certs."${vals.environment.ARNS_ROOT_HOST}" = {
+      domain = vals.environment.ARNS_ROOT_HOST;
+      extraDomainNames = [ "*.${vals.environment.ARNS_ROOT_HOST}" ];
       credentialsFile = "/root/cf-token";
     };
   };
@@ -30,8 +30,8 @@
 
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
-    virtualHosts."permaframes.cc" = {
-      useACMEHost = "permaframes.cc";
+    virtualHosts."${vals.environment.ARNS_ROOT_HOST}" = {
+      useACMEHost = vals.environment.ARNS_ROOT_HOST;
       forceSSL = true;
 
       locations."/" = {
@@ -43,7 +43,7 @@
         proxyPass = "http://localhost:1024/grafana";
         proxyWebsockets = true;
         basicAuth = {
-          admin = "permaframes123";
+          admin = vals.environment.ADMIN_API_KEY;
         };
       };
 
@@ -51,7 +51,7 @@
         proxyPass = "http://localhost:61208";
         proxyWebsockets = true;
         basicAuth = {
-          admin = "permaframes123";
+          admin = vals.environment.ADMIN_API_KEY;
         };
       };
     };

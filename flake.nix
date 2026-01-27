@@ -19,23 +19,27 @@
       nixosConfigurations.ario = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
+        specialArgs = {
+          vals = import ./vals.nix;
+        };
+
         modules = [
           disko.nixosModules.disko
           ./modules/configuration.nix
-          ./modules/hardware-configuration.nix
+          ./modules/hardware-config.nix
         ];
       };
 
-      deploy.nodes.contabo-test = {
-        sshUser = "root";
-        hostname = "contabo-test";
-        remoteBuild = true;
-
-        profiles.system = {
-          user = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ario;
-        };
-      };
+      deploy.nodes = builtins.mapAttrs (
+        _: node:
+        node
+        // {
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ario;
+          };
+        }
+      ) (import ./inventory.nix).nodes;
 
       # This will prevent many possible mistakes
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;

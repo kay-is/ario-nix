@@ -1,10 +1,10 @@
 {
-  self,
+  vals,
   modulesPath,
   lib,
   pkgs,
   ...
-}@args:
+}:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -12,7 +12,6 @@
     ./disk-config.nix
     ./ario-config.nix
     ./proxy-config.nix
-    ../vals.nix
   ];
 
   boot.loader.grub = {
@@ -30,10 +29,10 @@
   services.glances.enable = true;
 
   virtualisation.oci-containers.containers."ario-core" = {
-    environment = self.vals.environment;
+    environment = lib.mapAttrs (_: lib.mkForce) vals.environment;
   };
 
-  users.users.root.openssh.authorizedKeys.keys = self.vals.sshKeys;
+  users.users.root.openssh.authorizedKeys.keys = vals.sshKeys;
 
   system.stateVersion = "24.05";
 }

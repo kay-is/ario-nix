@@ -8,9 +8,7 @@ if [ -z "$node" ]; then
   exit 1
 fi
 
-
-
 nix run github:nix-community/nixos-anywhere -- \
   --flake ".#ario" \
-  --generate-hardware-config nixos-generate-config ./hardware-configuration.nix \
+  --generate-hardware-config nixos-generate-config ./modules/hardware-config.nix \
   "$node"

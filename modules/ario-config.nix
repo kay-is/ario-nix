@@ -41,7 +41,7 @@
     ];
   };
   virtualisation.oci-containers.containers."ario-core" = {
-    image = "ghcr.io/ar-io/ar-io-core:ac6dc46881a29cd1d39ab0466e2bf219dc2a363c";
+    image = "ghcr.io/ar-io/ar-io-core:5ce74c405bfeeab8b680ec720d3df006becd8cb5";
     environment = {
       "ADMIN_API_KEY" = "";
       "ANS104_DOWNLOAD_WORKERS" = "";
@@ -75,7 +75,7 @@
       "ARWEAVE_NODE_IGNORE_URLS" = "";
       "ARWEAVE_POST_DRY_RUN" = "false";
       "ARWEAVE_POST_DRY_RUN_SKIP_VALIDATION" = "false";
-      "AR_IO_NODE_RELEASE" = "64";
+      "AR_IO_NODE_RELEASE" = "66";
       "AR_IO_SDK_LOG_LEVEL" = "none";
       "AR_IO_WALLET" = "";
       "AWS_ACCESS_KEY_ID" = "";
@@ -102,6 +102,11 @@
       "BUNDLE_REPAIR_RETRY_BATCH_SIZE" = "";
       "BUNDLE_REPAIR_RETRY_INTERVAL_SECONDS" = "";
       "BUNDLE_REPAIR_UPDATE_TIMESTAMPS_INTERVAL_SECONDS" = "";
+      "CDB64_REMOTE_CACHE_MAX_REGIONS" = "";
+      "CDB64_REMOTE_CACHE_TTL_MS" = "";
+      "CDB64_REMOTE_REQUEST_TIMEOUT_MS" = "";
+      "CDB64_REMOTE_RETRIEVAL_ORDER" = "";
+      "CDB64_ROOT_TX_INDEX_SOURCES" = "";
       "CDB64_ROOT_TX_INDEX_WATCH" = "";
       "CDP_API_KEY_ID" = "";
       "CDP_API_KEY_SECRET" = "";
@@ -346,7 +351,7 @@
       "AO_GATEWAY_URL" = "";
       "AO_GRAPHQL_URL" = "";
       "AO_MU_URL" = "";
-      "AR_IO_NODE_RELEASE" = "64";
+      "AR_IO_NODE_RELEASE" = "66";
       "AR_IO_SDK_LOG_LEVEL" = "none";
       "IO_PROCESS_ID" = "";
       "LOG_LEVEL" = "";
@@ -455,7 +460,7 @@
     };
     script = ''
       cd /home/k/Development/ario-gw-nix
-      docker build -t ghcr.io/ar-io/ar-io-core:ac6dc46881a29cd1d39ab0466e2bf219dc2a363c .
+      docker build -t ghcr.io/ar-io/ar-io-core:5ce74c405bfeeab8b680ec720d3df006becd8cb5 .
     '';
   };
   systemd.services."docker-build-ario-envoy" = {

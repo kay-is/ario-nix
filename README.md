@@ -17,7 +17,6 @@ which will use nixos-anywhere/kexec to convert your instance.
 Create a `vals.nix` file that contains your public keys and environment variables.
 
 ```nix
-{ ... }:
 {
   sshKeys = [
     "..."
