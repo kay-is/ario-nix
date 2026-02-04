@@ -14,7 +14,7 @@ which will use nixos-anywhere/kexec to convert your instance.
 
 ### Setup
 
-Create a `vals.nix` file that contains your public keys and environment variables.
+Create a `vars.nix` file that contains your public keys and environment variables.
 
 ```nix
 {
