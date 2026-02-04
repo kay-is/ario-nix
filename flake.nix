@@ -20,7 +20,7 @@
         system = "x86_64-linux";
 
         specialArgs = {
-          vals = import ./vals.nix;
+          vars = import ./vars.nix;
         };
 
         modules = [

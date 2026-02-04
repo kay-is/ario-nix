@@ -1,4 +1,4 @@
-{ vals, ... }:
+{ vars, ... }:
 {
   networking.firewall.allowedTCPPorts = [
     80
@@ -7,21 +7,20 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults = {
-      group = "nginx";
 
-      email = vals.domainEmail;
-      dnsProvider = "cloudflare";
-      dnsResolver = "1.1.1.1:53";
+    defaults = {
+      email = vars.dns.email;
+      dnsProvider = vars.dns.provider;
+      environmentFile = vars.dns.credentialFile;
       dnsPropagationCheck = true;
 
+      group = "nginx";
       reloadServices = [ "nginx" ];
     };
 
-    certs."${vals.environment.ARNS_ROOT_HOST}" = {
-      domain = vals.environment.ARNS_ROOT_HOST;
-      extraDomainNames = [ "*.${vals.environment.ARNS_ROOT_HOST}" ];
-      credentialsFile = "/root/cf-token";
+    certs."${vars.environment.ARNS_ROOT_HOST}" = {
+      domain = "${vars.environment.ARNS_ROOT_HOST}";
+      extraDomainNames = [ "*.${vars.environment.ARNS_ROOT_HOST}" ];
     };
   };
 
@@ -30,8 +29,10 @@
 
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
-    virtualHosts."${vals.environment.ARNS_ROOT_HOST}" = {
-      useACMEHost = vals.environment.ARNS_ROOT_HOST;
+
+    #virtualHosts."${vars.environment.ARNS_ROOT_HOST}" = {
+    virtualHosts."permaframes.cc" = {
+      useACMEHost = vars.environment.ARNS_ROOT_HOST;
       forceSSL = true;
 
       locations."/" = {
@@ -43,7 +44,7 @@
         proxyPass = "http://localhost:1024/grafana";
         proxyWebsockets = true;
         basicAuth = {
-          admin = vals.environment.ADMIN_API_KEY;
+          admin = vars.environment.ADMIN_API_KEY;
         };
       };
 
@@ -51,8 +52,12 @@
         proxyPass = "http://localhost:61208";
         proxyWebsockets = true;
         basicAuth = {
-          admin = vals.environment.ADMIN_API_KEY;
+          admin = vars.environment.ADMIN_API_KEY;
         };
+        extraConfig = ''
+          rewrite /glances/(.*) /$1 break;
+          port_in_redirect off;
+        '';
       };
     };
   };

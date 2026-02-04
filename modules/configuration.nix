@@ -1,5 +1,5 @@
 {
-  vals,
+  vars,
   modulesPath,
   lib,
   pkgs,
@@ -21,18 +21,27 @@
     efiInstallAsRemovable = true;
   };
 
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 30d";
+  };
+
   environment.systemPackages = map lib.lowPrio [
     pkgs.curl
   ];
 
   services.openssh.enable = true;
-  services.glances.enable = true;
 
-  virtualisation.oci-containers.containers."ario-core" = {
-    environment = lib.mapAttrs (_: lib.mkForce) vals.environment;
+  services.glances = {
+    enable = true;
+    extraArgs = [ "--webserver" ];
   };
 
-  users.users.root.openssh.authorizedKeys.keys = vals.sshKeys;
+  virtualisation.oci-containers.containers."ario-core" = {
+    environment = lib.mapAttrs (_: lib.mkForce) vars.environment;
+  };
+
+  users.users.root.openssh.authorizedKeys.keys = vars.sshKeys;
 
   system.stateVersion = "24.05";
 }

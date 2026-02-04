@@ -41,7 +41,7 @@
     ];
   };
   virtualisation.oci-containers.containers."ario-core" = {
-    image = "ghcr.io/ar-io/ar-io-core:5ce74c405bfeeab8b680ec720d3df006becd8cb5";
+    image = "ghcr.io/ar-io/ar-io-core:caab23ba8515873ae2a4e2e6ca2ed4d096498df3";
     environment = {
       "ADMIN_API_KEY" = "";
       "ANS104_DOWNLOAD_WORKERS" = "";
@@ -75,7 +75,7 @@
       "ARWEAVE_NODE_IGNORE_URLS" = "";
       "ARWEAVE_POST_DRY_RUN" = "false";
       "ARWEAVE_POST_DRY_RUN_SKIP_VALIDATION" = "false";
-      "AR_IO_NODE_RELEASE" = "66";
+      "AR_IO_NODE_RELEASE" = "67";
       "AR_IO_SDK_LOG_LEVEL" = "none";
       "AR_IO_WALLET" = "";
       "AWS_ACCESS_KEY_ID" = "";
@@ -345,20 +345,38 @@
     ];
   };
   virtualisation.oci-containers.containers."ario-observer" = {
-    image = "ghcr.io/ar-io/ar-io-observer:e34a7f01768d505360a4e0877fe40d55230e864a";
+    image = "ghcr.io/ar-io/ar-io-observer:8fb7b2f71b28bc77810ead87560aa96042119b4b";
     environment = {
       "AO_CU_URL" = "";
       "AO_GATEWAY_URL" = "";
       "AO_GRAPHQL_URL" = "";
       "AO_MU_URL" = "";
-      "AR_IO_NODE_RELEASE" = "66";
+      "AR_IO_NODE_RELEASE" = "67";
       "AR_IO_SDK_LOG_LEVEL" = "none";
       "IO_PROCESS_ID" = "";
       "LOG_LEVEL" = "";
+      "MAJORITY_VOTE_THRESHOLD" = "";
       "MIN_RELEASE_NUMBER" = "0";
       "NETWORK_AO_CU_URL" = "";
       "NUM_ARNS_NAMES_TO_OBSERVE_PER_GROUP" = "8";
+      "OBSERVATIONS_PER_GATEWAY" = "";
+      "OBSERVATION_CYCLE_INTERVAL_MS" = "";
+      "OBSERVATION_WINDOW_FRACTION" = "";
       "OBSERVER_WALLET" = "";
+      "OFFSET_OBSERVATION_ENABLED" = "";
+      "OFFSET_OBSERVATION_ENFORCEMENT_ENABLED" = "";
+      "OFFSET_OBSERVATION_SAMPLE_RATE" = "";
+      "REFERENCE_GATEWAY_CONSENSUS_MAX_ATTEMPTS" = "";
+      "REFERENCE_GATEWAY_CONSENSUS_SIZE" = "";
+      "REFERENCE_GATEWAY_CONSENSUS_THRESHOLD" = "";
+      "REFERENCE_GATEWAY_HOSTS" = "";
+      "REFERENCE_GATEWAY_MAX_NETWORK_POOL" = "";
+      "REFERENCE_GATEWAY_MIN_CONSECUTIVE_PASSES" = "";
+      "REFERENCE_GATEWAY_MIN_EPOCH_COUNT" = "";
+      "REFERENCE_GATEWAY_MIN_PASS_RATE" = "";
+      "REFERENCE_GATEWAY_NETWORK_CACHE_TTL_SECONDS" = "";
+      "REFERENCE_GATEWAY_NETWORK_FALLBACK" = "";
+      "REFERENCE_GATEWAY_NETWORK_ONLY" = "";
       "REPORT_DATA_SINK" = "";
       "REPORT_GENERATION_INTERVAL_MS" = "";
       "RUN_OBSERVER" = "true";
@@ -460,7 +478,7 @@
     };
     script = ''
       cd /home/k/Development/ario-gw-nix
-      docker build -t ghcr.io/ar-io/ar-io-core:5ce74c405bfeeab8b680ec720d3df006becd8cb5 .
+      docker build -t ghcr.io/ar-io/ar-io-core:caab23ba8515873ae2a4e2e6ca2ed4d096498df3 .
     '';
   };
   systemd.services."docker-build-ario-envoy" = {
