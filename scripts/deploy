@@ -13,4 +13,7 @@ if [ ! -f "modules/ario-config.nix" ]; then
   exit 1
 fi
 
+ssh "$node" "mkdir -p /opt/ario"
+scp resources/prometheus.yml "$node:/opt/ario/prometheus.yml"
+
 nix run github:szlend/deploy-rs/fix-show-derivation-parsing -- ".#$node"

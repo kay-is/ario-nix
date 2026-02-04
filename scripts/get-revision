@@ -8,12 +8,36 @@ if [ -z "$revision" ]; then
   exit 1
 fi
 
-composeUrl="https://raw.githubusercontent.com/ar-io/ar-io-node/refs/tags/$revision/docker-compose.yaml"
+if [ ! -d "resources" ]; then
+  mkdir resources
+fi
 
-curl -L -o docker-compose.yml "$composeUrl"
+rm -f resources/*
+
+gatewayComposeUrl="https://raw.githubusercontent.com/ar-io/ar-io-node/refs/tags/$revision/docker-compose.yaml"
+
+curl -L -o resources/docker-compose.yml "$gatewayComposeUrl"
 
 nix run github:aksiksi/compose2nix -- \
   --project=ario \
   --runtime=docker \
-  --inputs=docker-compose.yml \
+  --root_path=/opt/ario \
+  --inputs=resources/docker-compose.yml \
   --output=modules/ario-config.nix
+
+grafanaComposeUrl="https://raw.githubusercontent.com/ar-io/ar-io-node/refs/tags/$revision/docker-compose.grafana.yaml"
+
+curl -L -o resources/docker-compose.grafana.yml "$grafanaComposeUrl"
+
+nix run github:aksiksi/compose2nix -- \
+  --project=ario \
+  --runtime=docker \
+  --root_path=/opt/ario \
+  --inputs=resources/docker-compose.grafana.yml \
+  --output=modules/ario-grafana-config.nix
+
+prometheusConfigUrl="https://raw.githubusercontent.com/ar-io/ar-io-node/refs/tags/$revision/prometheus.yml"
+
+curl -L -o resources/prometheus.yml "$prometheusConfigUrl"
+
+echo "$revision" > resources/revision 
