@@ -245,17 +245,17 @@
       "X_402_USDC_WALLET_ADDRESS" = "";
     };
     volumes = [
-      "/home/k/Development/ario-gw-nix/data/cdb64-root-tx-index:/app/data/cdb64-root-tx-index:rw"
-      "/home/k/Development/ario-gw-nix/data/chunks:/app/data/chunks:rw"
-      "/home/k/Development/ario-gw-nix/data/contiguous:/app/data/contiguous:rw"
-      "/home/k/Development/ario-gw-nix/data/datasets:/app/data/datasets:rw"
-      "/home/k/Development/ario-gw-nix/data/duckdb:/app/data/duckdb:rw"
-      "/home/k/Development/ario-gw-nix/data/headers:/app/data/headers:rw"
-      "/home/k/Development/ario-gw-nix/data/lmdb:/app/data/lmdb:rw"
-      "/home/k/Development/ario-gw-nix/data/parquet:/app/data/parquet:rw"
-      "/home/k/Development/ario-gw-nix/data/sqlite:/app/data/sqlite:rw"
-      "/home/k/Development/ario-gw-nix/data/tmp:/app/data/tmp:rw"
-      "/home/k/Development/ario-gw-nix/secrets:/app/secrets:ro"
+      "/opt/ario/data/cdb64-root-tx-index:/app/data/cdb64-root-tx-index:rw"
+      "/opt/ario/data/chunks:/app/data/chunks:rw"
+      "/opt/ario/data/contiguous:/app/data/contiguous:rw"
+      "/opt/ario/data/datasets:/app/data/datasets:rw"
+      "/opt/ario/data/duckdb:/app/data/duckdb:rw"
+      "/opt/ario/data/headers:/app/data/headers:rw"
+      "/opt/ario/data/lmdb:/app/data/lmdb:rw"
+      "/opt/ario/data/parquet:/app/data/parquet:rw"
+      "/opt/ario/data/sqlite:/app/data/sqlite:rw"
+      "/opt/ario/data/tmp:/app/data/tmp:rw"
+      "/opt/ario/secrets:/app/secrets:ro"
     ];
     ports = [
       "4000:4000/tcp"
@@ -384,10 +384,10 @@
       "TURBO_UPLOAD_SERVICE_URL" = "";
     };
     volumes = [
-      "/home/k/Development/ario-gw-nix/data/observer:/app/data/observer:rw"
-      "/home/k/Development/ario-gw-nix/data/reports:/app/data/reports:rw"
-      "/home/k/Development/ario-gw-nix/data/tmp:/app/data/tmp:rw"
-      "/home/k/Development/ario-gw-nix/wallets:/app/wallets:rw"
+      "/opt/ario/data/observer:/app/data/observer:rw"
+      "/opt/ario/data/reports:/app/data/reports:rw"
+      "/opt/ario/data/tmp:/app/data/tmp:rw"
+      "/opt/ario/wallets:/app/wallets:rw"
     ];
     ports = [
       "5050:5050/tcp"
@@ -421,7 +421,7 @@
   virtualisation.oci-containers.containers."ario-redis" = {
     image = "redis:7";
     volumes = [
-      "/home/k/Development/ario-gw-nix/data/redis:/data:rw"
+      "/opt/ario/data/redis:/data:rw"
     ];
     ports = [
       "6379/tcp"
@@ -477,7 +477,7 @@
       TimeoutSec = 300;
     };
     script = ''
-      cd /home/k/Development/ario-gw-nix
+      cd /opt/ario
       docker build -t ghcr.io/ar-io/ar-io-core:caab23ba8515873ae2a4e2e6ca2ed4d096498df3 .
     '';
   };
@@ -488,7 +488,7 @@
       TimeoutSec = 300;
     };
     script = ''
-      cd /home/k/Development/ario-gw-nix/envoy
+      cd /opt/ario/envoy
       docker build -t ghcr.io/ar-io/ar-io-envoy:4755fa0a2deb258bfaeaa91ba3154f1f7ef41fda .
     '';
   };
