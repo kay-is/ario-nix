@@ -11,7 +11,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
     ./ario-config.nix
-    ./ario-grafana-config.nix
+    ./grafana-config.nix
     ./proxy-config.nix
   ];
 
