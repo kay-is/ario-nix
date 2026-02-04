@@ -6,7 +6,7 @@
 
 {
   imports = [
-    ./ario-grafana-config.generated.nix
+    ./grafana-config.generated.nix
   ];
 
   # Ensure Grafana bind mounts are writable by uid/gid 472 inside the container
@@ -21,5 +21,10 @@
   virtualisation.oci-containers.containers."ario-grafana".environment = {
     GF_SERVER_ROOT_URL = lib.mkForce "https://${vars.environment.ARNS_ROOT_HOST}/grafana";
     GF_SERVER_SERVE_FROM_SUB_PATH = lib.mkForce "true";
+  };
+
+  services.glances = {
+    enable = true;
+    extraArgs = [ "--webserver" ];
   };
 }

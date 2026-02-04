@@ -10,8 +10,8 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
+    ./monitoring-config.nix
     ./ario-config.nix
-    ./grafana-config.nix
     ./proxy-config.nix
   ];
 
@@ -32,15 +32,6 @@
   ];
 
   services.openssh.enable = true;
-
-  services.glances = {
-    enable = true;
-    extraArgs = [ "--webserver" ];
-  };
-
-  virtualisation.oci-containers.containers."ario-core" = {
-    environment = lib.mapAttrs (_: lib.mkForce) vars.environment;
-  };
 
   users.users.root.openssh.authorizedKeys.keys = vars.sshKeys;
 

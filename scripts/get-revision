@@ -23,7 +23,7 @@ nix run github:aksiksi/compose2nix -- \
   --runtime=docker \
   --root_path=/opt/ario \
   --inputs=resources/docker-compose.yml \
-  --output=modules/ario-config.nix
+  --output=modules/ario-config.generated.nix
 
 grafanaComposeUrl="https://raw.githubusercontent.com/ar-io/ar-io-node/refs/tags/$revision/docker-compose.grafana.yaml"
 
@@ -34,7 +34,7 @@ nix run github:aksiksi/compose2nix -- \
   --runtime=docker \
   --root_path=/opt/ario \
   --inputs=resources/docker-compose.grafana.yml \
-  --output=modules/ario-grafana-config.nix
+  --output=modules/grafana-config.generated.nix
 
 prometheusConfigUrl="https://raw.githubusercontent.com/ar-io/ar-io-node/refs/tags/$revision/prometheus.yml"
 
