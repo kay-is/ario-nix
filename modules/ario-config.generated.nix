@@ -41,41 +41,66 @@
     ];
   };
   virtualisation.oci-containers.containers."ario-core" = {
-    image = "ghcr.io/ar-io/ar-io-core:caab23ba8515873ae2a4e2e6ca2ed4d096498df3";
+    image = "ghcr.io/ar-io/ar-io-core:f3032933c6039305bc5ecec0d486526c6d60d6ea";
     environment = {
       "ADMIN_API_KEY" = "";
+      "ANS104_DATA_INDEXER_QUEUE_SIZE" = "";
       "ANS104_DOWNLOAD_WORKERS" = "";
       "ANS104_INDEX_FILTER" = "";
+      "ANS104_PARSE_JOB_TIMEOUT_MS" = "";
       "ANS104_UNBUNDLE_FILTER" = "";
+      "ANS104_UNBUNDLE_GET_DATA_TIMEOUT_MS" = "";
+      "ANS104_UNBUNDLE_GET_DATA_WALL_CLOCK_TIMEOUT_MS" = "";
+      "ANS104_UNBUNDLE_STREAM_TOTAL_TIMEOUT_MS" = "";
       "ANS104_UNBUNDLE_WORKERS" = "";
-      "ANT_AO_CU_URL" = "";
-      "AO_ANT_HYPERBEAM_URL" = "";
-      "AO_CU_URL" = "";
-      "AO_GATEWAY_URL" = "";
-      "AO_GRAPHQL_URL" = "";
-      "AO_MU_URL" = "";
       "APEX_ARNS_NAME" = "";
       "APEX_TX_ID" = "";
+      "ARIO_ANT_PROGRAM_ID" = "2MWexMHfMhGJwMHv9Qm9YAVCqjUFUJwDJAysW4oCUGk5";
+      "ARIO_ARNS_PROGRAM_ID" = "2yCUx5edFvUrkibYaUa2ZXWyx9kuJkS8CwyzsgHPWdZZ";
+      "ARIO_CORE_PROGRAM_ID" = "73YoECm6NKXpVRoe5f1Q9BcP5DJGPFUjnFy6AxBE5Nvh";
+      "ARIO_GAR_PROGRAM_ID" = "89fNiiwgpFSPHKuqfNUkgYTYjtAJAhyqHjXmgXeppGpf";
       "ARIO_PROCESS_DEFAULT_CIRCUIT_BREAKER_ERROR_THRESHOLD_PERCENTAGE" = "";
       "ARIO_PROCESS_DEFAULT_CIRCUIT_BREAKER_RESET_TIMEOUT_MS" = "";
       "ARIO_PROCESS_DEFAULT_CIRCUIT_BREAKER_ROLLING_COUNT_TIMEOUT_MS" = "";
       "ARIO_PROCESS_DEFAULT_CIRCUIT_BREAKER_TIMEOUT_MS" = "";
+      "ARNS_ANT_STATE_CACHE_HIT_REFRESH_WINDOW_SECONDS" = "";
+      "ARNS_CACHED_RESOLUTION_FALLBACK_TIMEOUT_MS" = "";
       "ARNS_CACHE_MAX_KEYS" = "10000";
       "ARNS_CACHE_TTL_SECONDS" = "";
       "ARNS_CACHE_TYPE" = "redis";
+      "ARNS_COMPOSITE_LAST_RESOLVER_TIMEOUT_MS" = "";
       "ARNS_COMPOSITE_RESOLVER_TIMEOUT_MS" = "";
       "ARNS_MAX_CONCURRENT_RESOLUTIONS" = "";
       "ARNS_NAMES_CACHE_TTL_SECONDS" = "";
+      "ARNS_NAME_LIST_CACHE_HIT_REFRESH_INTERVAL_SECONDS" = "";
+      "ARNS_NAME_LIST_CACHE_MISS_REFRESH_INTERVAL_SECONDS" = "";
       "ARNS_NOT_FOUND_ARNS_NAME" = "";
       "ARNS_NOT_FOUND_TX_ID" = "";
       "ARNS_RESOLVER_ENFORCE_UNDERNAME_LIMIT" = "";
       "ARNS_RESOLVER_OVERRIDE_TTL_SECONDS" = "";
       "ARNS_RESOLVER_PRIORITY_ORDER" = "";
       "ARNS_ROOT_HOST" = "";
+      "ARWEAVE_CHUNK_GET_GEOMETRY_RETRY_COUNT" = "";
+      "ARWEAVE_CHUNK_GET_GEOMETRY_TIMEOUT_MS" = "";
+      "ARWEAVE_HEIGHT_MIN_CONSENSUS_COUNT" = "";
+      "ARWEAVE_NODE_FULL_SYNC_THRESHOLD" = "";
       "ARWEAVE_NODE_IGNORE_URLS" = "";
+      "ARWEAVE_NODE_MAX_HEIGHT_LAG" = "";
+      "ARWEAVE_NODE_MAX_HEIGHT_LEAD" = "";
+      "ARWEAVE_PEER_CHUNK_GET_MAX_PEER_ATTEMPT_COUNT" = "";
+      "ARWEAVE_PEER_CHUNK_GET_PEER_SELECTION_COUNT" = "";
+      "ARWEAVE_PEER_CHUNK_POST_CONCURRENCY_LIMIT" = "";
+      "ARWEAVE_PEER_CHUNK_POST_MAX_PEER_ATTEMPT_COUNT" = "";
+      "ARWEAVE_PEER_CHUNK_POST_MIN_SUCCESS_COUNT" = "";
+      "ARWEAVE_PEER_DNS_PORT" = "";
+      "ARWEAVE_PEER_DNS_RECORDS" = "";
+      "ARWEAVE_PEER_HEALTH_CHECK_INTERVAL_MS" = "";
       "ARWEAVE_POST_DRY_RUN" = "false";
       "ARWEAVE_POST_DRY_RUN_SKIP_VALIDATION" = "false";
-      "AR_IO_NODE_RELEASE" = "67";
+      "ARWEAVE_TAG_RESPONSE_HEADERS_ENABLED" = "";
+      "ARWEAVE_TAG_RESPONSE_HEADERS_MAX" = "";
+      "ARWEAVE_TAG_RESPONSE_HEADERS_MAX_BYTES" = "";
+      "AR_IO_NODE_RELEASE" = "81";
       "AR_IO_SDK_LOG_LEVEL" = "none";
       "AR_IO_WALLET" = "";
       "AWS_ACCESS_KEY_ID" = "";
@@ -91,34 +116,75 @@
       "AWS_REGION" = "";
       "AWS_S3_CONTIGUOUS_DATA_BUCKET" = "";
       "AWS_S3_CONTIGUOUS_DATA_PREFIX" = "";
+      "AWS_S3_TURBO_CONTIGUOUS_DATA_BUCKET" = "";
+      "AWS_S3_TURBO_CONTIGUOUS_DATA_PREFIX" = "";
       "AWS_SECRET_ACCESS_KEY" = "";
+      "AWS_SESSION_TOKEN" = "";
       "BACKFILL_BUNDLE_RECORDS" = "";
+      "BACKGROUND_CACHE_RANGE_CONCURRENCY" = "";
+      "BACKGROUND_CACHE_RANGE_MAX_SIZE" = "";
       "BACKGROUND_DATA_VERIFICATION_INTERVAL_SECONDS" = "";
+      "BACKGROUND_DATA_VERIFICATION_STREAM_TIMEOUT_MS" = "";
+      "BACKGROUND_DATA_VERIFICATION_WORKER_COUNT" = "";
       "BACKGROUND_RETRIEVAL_ORDER" = "";
       "BUNDLER_URLS" = "";
       "BUNDLE_DATA_IMPORTER_QUEUE_SIZE" = "";
+      "BUNDLE_DATA_ITEM_DRAIN_BATCH" = "";
       "BUNDLE_REPAIR_BACKFILL_INTERVAL_SECONDS" = "";
       "BUNDLE_REPAIR_FILTER_REPROCESS_INTERVAL_SECONDS" = "";
+      "BUNDLE_REPAIR_MAX_RETRY_ATTEMPTS" = "";
       "BUNDLE_REPAIR_RETRY_BATCH_SIZE" = "";
+      "BUNDLE_REPAIR_RETRY_COOLDOWN_SECONDS" = "";
       "BUNDLE_REPAIR_RETRY_INTERVAL_SECONDS" = "";
       "BUNDLE_REPAIR_UPDATE_TIMESTAMPS_INTERVAL_SECONDS" = "";
+      "CACHE_APEX_MAX_AGE" = "";
+      "CACHE_BLOCKED_MAX_AGE" = "";
+      "CACHE_DEFAULT_MAX_AGE" = "";
+      "CACHE_NOT_FOUND_MAX_AGE" = "";
+      "CACHE_ONLY_CLIENT_IPS_AND_CIDRS" = "";
+      "CACHE_PRIVATE_CONTENT_TYPES" = "";
+      "CACHE_PRIVATE_SIZE_THRESHOLD" = "";
+      "CACHE_STABLE_MAX_AGE" = "";
+      "CACHE_UNSTABLE_MAX_AGE" = "";
+      "CACHE_UNSTABLE_TRUSTED_MAX_AGE" = "";
       "CDB64_REMOTE_CACHE_MAX_REGIONS" = "";
       "CDB64_REMOTE_CACHE_TTL_MS" = "";
+      "CDB64_REMOTE_MAX_CONCURRENT_REQUESTS" = "";
       "CDB64_REMOTE_REQUEST_TIMEOUT_MS" = "";
       "CDB64_REMOTE_RETRIEVAL_ORDER" = "";
+      "CDB64_REMOTE_SEMAPHORE_TIMEOUT_MS" = "";
       "CDB64_ROOT_TX_INDEX_SOURCES" = "";
       "CDB64_ROOT_TX_INDEX_WATCH" = "";
       "CDP_API_KEY_ID" = "";
       "CDP_API_KEY_SECRET" = "";
       "CDP_API_KEY_SECRET_FILE" = "";
       "CHAIN_CACHE_TYPE" = "redis";
+      "CHUNK_DATA_CACHE_CLEANUP_THRESHOLD" = "";
       "CHUNK_DATA_RETRIEVAL_ORDER" = "";
       "CHUNK_DATA_SOURCE_PARALLELISM" = "";
+      "CHUNK_FIRST_DATA_TIMEOUT_MS" = "";
+      "CHUNK_GET_BASE64_SIZE_BYTES" = "";
+      "CHUNK_INGEST_ALLOWLIST_CONFIRMATION_TIMEOUT_SECONDS" = "";
+      "CHUNK_INGEST_CACHE_ALLOWLIST" = "";
+      "CHUNK_INGEST_CACHE_ENABLED" = "";
+      "CHUNK_INGEST_CONFIRMATION_TIMEOUT_SECONDS" = "";
+      "CHUNK_INGEST_GC_BATCH_SIZE" = "";
+      "CHUNK_INGEST_GC_INTERVAL_MS" = "";
+      "CHUNK_INGEST_MAX_PENDING_BYTES" = "";
       "CHUNK_METADATA_CACHE_TYPE" = "redis";
       "CHUNK_METADATA_RETRIEVAL_ORDER" = "";
       "CHUNK_METADATA_SOURCE_PARALLELISM" = "";
+      "CHUNK_OFFSET_CHAIN_FALLBACK_BLOCK_CACHE_SIZE" = "";
+      "CHUNK_OFFSET_CHAIN_FALLBACK_BLOCK_CACHE_TTL_MS" = "";
       "CHUNK_OFFSET_CHAIN_FALLBACK_CONCURRENCY" = "";
+      "CHUNK_OFFSET_CHAIN_FALLBACK_ENABLED" = "";
+      "CHUNK_OFFSET_CHAIN_FALLBACK_TX_DATA_CACHE_SIZE" = "";
+      "CHUNK_OFFSET_CHAIN_FALLBACK_TX_DATA_CACHE_TTL_MS" = "";
+      "CHUNK_OFFSET_CHAIN_FALLBACK_TX_OFFSET_CACHE_SIZE" = "";
+      "CHUNK_OFFSET_CHAIN_FALLBACK_TX_OFFSET_CACHE_TTL_MS" = "";
       "CHUNK_POST_ABORT_TIMEOUT_MS" = "";
+      "CHUNK_POST_MAX_CONSECUTIVE_FAILURES" = "";
+      "CHUNK_POST_MIN_PREFERRED_SUCCESS_COUNT" = "";
       "CHUNK_POST_MIN_SUCCESS_COUNT" = "";
       "CHUNK_POST_PEER_CONCURRENCY" = "";
       "CHUNK_POST_PER_NODE_CONCURRENCY" = "";
@@ -131,13 +197,40 @@
       "CHUNK_REBROADCAST_RATE_LIMIT_INTERVAL" = "";
       "CHUNK_REBROADCAST_RATE_LIMIT_TOKENS" = "";
       "CHUNK_REBROADCAST_SOURCES" = "";
+      "CHUNK_REQUEST_CONCURRENCY" = "";
+      "CHUNK_SERVE_DEADLINE_MS" = "";
       "CHUNK_SYMLINK_CLEANUP_INTERVAL" = "";
+      "CIRCUIT_BREAKER_FAILURE_THRESHOLD" = "";
+      "CIRCUIT_BREAKER_SUCCESS_THRESHOLD" = "";
+      "CIRCUIT_BREAKER_TIMEOUT_MS" = "";
+      "CLICKHOUSE_GQL_DEDUPE_HEADROOM" = "";
+      "CLICKHOUSE_GQL_MAX_ROWS_TO_READ" = "";
+      "CLICKHOUSE_GQL_SKIP_SQLITE_READS" = "";
+      "CLICKHOUSE_MAX_HEIGHT_CACHE_TTL_SECONDS" = "";
       "CLICKHOUSE_PASSWORD" = "";
+      "CLICKHOUSE_QUERY_TIMEOUT_SECONDS" = "";
+      "CLICKHOUSE_SQLITE_CIRCUIT_BREAKER_ERROR_THRESHOLD_PERCENTAGE" = "";
+      "CLICKHOUSE_SQLITE_CIRCUIT_BREAKER_RESET_TIMEOUT_MS" = "";
+      "CLICKHOUSE_SQLITE_CIRCUIT_BREAKER_ROLLING_COUNT_TIMEOUT_MS" = "";
+      "CLICKHOUSE_SQLITE_CIRCUIT_BREAKER_TIMEOUT_MS" = "";
+      "CLICKHOUSE_SQLITE_FALLBACK_CIRCUIT_BREAKER_TIMEOUT_MS" = "";
+      "CLICKHOUSE_SQLITE_MIN_HEIGHT_BUFFER" = "";
+      "CLICKHOUSE_SQLITE_MIN_HEIGHT_ENABLED" = "";
+      "CLICKHOUSE_STREAMER_BATCH_SIZE" = "";
+      "CLICKHOUSE_STREAMER_FLUSH_INTERVAL_MS" = "";
+      "CLICKHOUSE_STREAMER_QUEUE_MAX_SIZE" = "";
+      "CLICKHOUSE_STREAMING_ENABLED" = "";
       "CLICKHOUSE_URL" = "";
       "CLICKHOUSE_USER" = "";
+      "CONTIGUOUS_DATA_CACHE_CLEANUP_INITIAL_DELAY" = "";
       "CONTIGUOUS_DATA_CACHE_CLEANUP_THRESHOLD" = "";
+      "CONTIGUOUS_METADATA_CACHE_TYPE" = "";
+      "DATA_IMPORTER_DOWNLOAD_TIMEOUT_MS" = "";
       "DATA_ITEM_FLUSH_COUNT_THRESHOLD" = "";
+      "DATA_ITEM_INDEXER_QUEUE_SIZE" = "";
+      "DATA_ITEM_INDEXER_WORKER_COUNT" = "";
       "ENABLE_BACKGROUND_DATA_VERIFICATION" = "";
+      "ENABLE_CHUNK_DATA_CACHE_CLEANUP" = "";
       "ENABLE_CHUNK_SYMLINK_CLEANUP" = "";
       "ENABLE_DATASETS_ENDPOINT" = "";
       "ENABLE_DATA_DB_WAL_CLEANUP" = "";
@@ -146,15 +239,53 @@
       "ENABLE_MEMPOOL_WATCHER" = "";
       "ENABLE_PASSTHROUGH_WITHOUT_OFFSETS" = "";
       "ENABLE_RATE_LIMITER" = "";
+      "ENABLE_SAMPLING_DATA_SOURCE" = "";
       "ENABLE_X_402_USDC_DATA_EGRESS" = "";
       "FILTER_CHANGE_REPROCESS" = "";
       "FS_CLEANUP_WORKER_BATCH_PAUSE_DURATION" = "";
       "FS_CLEANUP_WORKER_BATCH_SIZE" = "";
       "FS_CLEANUP_WORKER_RESTART_PAUSE_DURATION" = "";
+      "GATEWAYS_GQL_CIRCUIT_BREAKER_ERROR_THRESHOLD_PERCENTAGE" = "";
+      "GATEWAYS_GQL_CIRCUIT_BREAKER_RESET_TIMEOUT_MS" = "";
+      "GATEWAYS_GQL_CIRCUIT_BREAKER_ROLLING_COUNT_TIMEOUT_MS" = "";
+      "GATEWAYS_GQL_CIRCUIT_BREAKER_TIMEOUT_MS" = "";
+      "GATEWAYS_GQL_INCLUDE_LOCAL" = "";
+      "GATEWAYS_GQL_REQUEST_TIMEOUT_MS" = "";
+      "GATEWAYS_GQL_URLS" = "";
+      "GATEWAYS_ROOT_TX_RATE_LIMIT_BURST_SIZE" = "";
+      "GATEWAYS_ROOT_TX_RATE_LIMIT_INTERVAL" = "";
+      "GATEWAYS_ROOT_TX_RATE_LIMIT_TOKENS_PER_INTERVAL" = "";
+      "GATEWAYS_ROOT_TX_REQUEST_TIMEOUT_MS" = "";
+      "GATEWAYS_ROOT_TX_URLS" = "";
       "GATEWAY_PEERS_REQUEST_WINDOW_COUNT" = "";
       "GATEWAY_PEERS_WEIGHTS_CACHE_DURATION_MS" = "";
+      "GET_DATA_CIRCUIT_BREAKER_TIMEOUT_MS" = "";
+      "GET_DEBUG_INFO_CACHE_TTL_MS" = "";
+      "GRAPHQL_ON_DEMAND_RESOLUTION_ENABLED" = "";
+      "GRAPHQL_ON_DEMAND_RESOLUTION_MAX_CONCURRENT" = "";
+      "GRAPHQL_ON_DEMAND_RESOLUTION_TIMEOUT_MS" = "";
+      "GRAPHQL_RESOLVER_DEADLINE_MS" = "";
+      "GRAPHQL_ROOT_TX_BATCH_ENABLED" = "";
+      "GRAPHQL_ROOT_TX_BATCH_MAX_QUEUE_DEPTH" = "";
+      "GRAPHQL_ROOT_TX_BATCH_MAX_SIZE" = "";
+      "GRAPHQL_ROOT_TX_BATCH_MAX_SIZE_BY_URL" = "";
+      "GRAPHQL_ROOT_TX_BATCH_TOKEN_MAX_WAIT_MS" = "";
+      "GRAPHQL_ROOT_TX_BATCH_WINDOW_MS" = "";
+      "GRAPHQL_ROOT_TX_GATEWAYS_URLS" = "";
+      "GRAPHQL_ROOT_TX_RATE_LIMIT_BURST_SIZE" = "";
+      "GRAPHQL_ROOT_TX_RATE_LIMIT_INTERVAL" = "";
+      "GRAPHQL_ROOT_TX_RATE_LIMIT_TOKENS_PER_INTERVAL" = "";
+      "HTTPSIG_BIND_REQUEST" = "";
+      "HTTPSIG_ENABLED" = "";
+      "HTTPSIG_KEY_FILE" = "";
+      "HTTP_HEADERS_TIMEOUT_MS" = "";
+      "HTTP_KEEP_ALIVE_TIMEOUT_MS" = "";
+      "HYPERBEAM_ENDPOINT" = "";
+      "HYPERBEAM_REQUEST_TIMEOUT_MS" = "";
+      "HYPERBEAM_ROOT_TX_RATE_LIMIT_BURST_SIZE" = "";
+      "HYPERBEAM_ROOT_TX_RATE_LIMIT_INTERVAL" = "";
+      "HYPERBEAM_ROOT_TX_RATE_LIMIT_TOKENS_PER_INTERVAL" = "";
       "INSTANCE_ID" = "";
-      "IO_PROCESS_ID" = "";
       "LEGACY_AWS_S3_ACCESS_KEY_ID" = "";
       "LEGACY_AWS_S3_CHUNK_DATA_BUCKET" = "";
       "LEGACY_AWS_S3_CHUNK_DATA_PREFIX" = "";
@@ -170,32 +301,62 @@
       "LEGACY_PSQL_PASSWORD_FILE" = "";
       "LEGACY_PSQL_SSL_REJECT_UNAUTHORIZED" = "";
       "LEGACY_PSQL_STATEMENT_TIMEOUT_MS" = "";
+      "LOG_ALL_STACKTRACES" = "";
       "LOG_FILTER" = "";
       "LOG_FORMAT" = "simple";
       "LOG_LEVEL" = "info";
       "MAX_DATA_ITEM_QUEUE_SIZE" = "";
       "MAX_EXPECTED_DATA_ITEM_INDEXING_INTERVAL_SECONDS" = "";
       "MAX_FLUSH_INTERVAL_SECONDS" = "";
-      "MEMPOOL_POOLING_INTERVAL_MS" = "";
+      "MAX_VERIFICATION_RETRIES" = "";
+      "MEMPOOL_POLLING_INTERVAL_MS" = "";
       "MIN_DATA_VERIFICATION_PRIORITY" = "";
-      "NETWORK_AO_CU_URL" = "";
+      "NEGATIVE_CACHE_ENABLED" = "";
+      "NEGATIVE_CACHE_HEALTH_MIN_SAMPLE_SIZE" = "";
+      "NEGATIVE_CACHE_HEALTH_WINDOW_MS" = "";
+      "NEGATIVE_CACHE_MAX_SIZE" = "";
+      "NEGATIVE_CACHE_MAX_TTL_MS" = "";
+      "NEGATIVE_CACHE_MISS_COUNT_THRESHOLD" = "";
+      "NEGATIVE_CACHE_MISS_THRESHOLD_MS" = "";
+      "NEGATIVE_CACHE_MISS_TRACKER_TTL_MS" = "";
+      "NEGATIVE_CACHE_PROMOTION_HISTORY_TTL_MS" = "";
+      "NEGATIVE_CACHE_TTL_MS" = "";
+      "NEGATIVE_CACHE_UNHEALTHY_THRESHOLD" = "";
       "NODE_ENV" = "production";
       "NODE_MAX_OLD_SPACE_SIZE" = "";
+      "OBSERVER_KEYPAIR_PATH" = "";
+      "OBSERVER_PRIVATE_KEY" = "";
       "ON_DEMAND_RETRIEVAL_ORDER" = "";
+      "OPTIMISTIC_TX_CLEANUP_WAIT_SECONDS" = "";
+      "OPTIMISTIC_TX_INDEXING_ENABLED" = "";
+      "OPTIMISTIC_TX_MAX_BATCH_SIZE" = "";
       "OTEL_BATCH_LOG_PROCESSOR_MAX_EXPORT_BATCH_SIZE" = "";
       "OTEL_BATCH_LOG_PROCESSOR_SCHEDULED_DELAY_MS" = "";
       "OTEL_EXPORTER_OTLP_ENDPOINT" = "";
       "OTEL_EXPORTER_OTLP_HEADERS" = "";
       "OTEL_EXPORTER_OTLP_HEADERS_FILE" = "";
+      "OTEL_RESOURCE_ATTRIBUTES" = "";
       "OTEL_SERVICE_NAME" = "";
       "OTEL_TRACING_SAMPLING_RATE_DENOMINATOR" = "";
+      "PARQUET_EXPORT_DUCKDB_MAX_TEMP_DIRECTORY_SIZE" = "";
+      "PARQUET_EXPORT_DUCKDB_MEMORY_LIMIT" = "";
+      "PARQUET_EXPORT_DUCKDB_THREADS" = "";
+      "PEER_CANDIDATE_COUNT" = "";
+      "PEER_HASH_RING_HOME_SET_SIZE" = "";
+      "PEER_HASH_RING_VIRTUAL_NODES" = "";
+      "PEER_HEDGE_DELAY_MS" = "";
+      "PEER_MAX_CONCURRENT_OUTBOUND" = "";
+      "PEER_MAX_HEDGED_REQUESTS" = "";
       "PEER_REFRESH_CONCURRENCY" = "";
       "PREFERRED_ARNS_BASE_NAMES" = "";
       "PREFERRED_ARNS_CONTIGUOUS_DATA_CACHE_CLEANUP_THRESHOLD" = "";
       "PREFERRED_ARNS_NAMES" = "";
       "PREFERRED_CHUNK_GET_NODE_URLS" = "";
+      "PREFERRED_CHUNK_NODE_DNS_RESOLUTION_INTERVAL_SECONDS" = "";
       "PREFERRED_CHUNK_POST_NODE_URLS" = "";
       "PREFERRED_CHUNK_POST_WEIGHT" = "";
+      "QUEUE_DATA_ITEM_BACKPRESSURE_DEPTH" = "";
+      "QUEUE_DATA_ITEM_MAX_BATCH_SIZE" = "";
       "RATE_LIMITER_ARNS_ALLOWLIST" = "";
       "RATE_LIMITER_IPS_AND_CIDRS_ALLOWLIST" = "";
       "RATE_LIMITER_IP_REFILL_PER_SEC" = "";
@@ -209,23 +370,51 @@
       "REDIS_CACHE_TTL_SECONDS" = "";
       "REDIS_CACHE_URL" = "redis://redis:6379";
       "REDIS_USE_TLS" = "";
+      "ROOT_TX_CACHE_MAX_SIZE" = "";
+      "ROOT_TX_CACHE_TTL_MS" = "";
+      "ROOT_TX_INDEX_CIRCUIT_BREAKER_FAILURE_THRESHOLD" = "";
+      "ROOT_TX_INDEX_CIRCUIT_BREAKER_SUCCESS_THRESHOLD" = "";
+      "ROOT_TX_INDEX_CIRCUIT_BREAKER_TIMEOUT_MS" = "";
       "ROOT_TX_LOOKUP_ORDER" = "";
+      "SAMPLING_DATA_SOURCE" = "";
+      "SAMPLING_RATE" = "";
+      "SAMPLING_STRATEGY" = "";
       "SANDBOX_PROTOCOL" = "";
       "SIMULATED_REQUEST_FAILURE_RATE" = "";
       "SKIP_CACHE" = "";
       "SKIP_DATA_CACHE" = "";
+      "SKIP_FORWARDING_EMPTY_USER_AGENT" = "";
+      "SKIP_FORWARDING_HEADERS" = "";
+      "SKIP_FORWARDING_USER_AGENTS" = "";
+      "SOLANA_RPC_URL" = "";
       "START_HEIGHT" = "";
       "START_WRITERS" = "";
       "STOP_HEIGHT" = "";
+      "STREAM_REQUEST_TIMEOUT_MS" = "";
+      "STREAM_STALL_TIMEOUT_MS" = "";
       "TAG_SELECTIVITY" = "";
       "TRUSTED_ARNS_GATEWAY_URL" = "";
+      "TRUSTED_ARNS_RESOLVER_HOST_HEADER" = "";
+      "TRUSTED_CACHE_RETRY_RATE" = "";
       "TRUSTED_GATEWAYS_BLOCKED_IPS_AND_CIDRS" = "";
       "TRUSTED_GATEWAYS_BLOCKED_ORIGINS" = "";
       "TRUSTED_GATEWAYS_REQUEST_TIMEOUT_MS" = "";
       "TRUSTED_GATEWAYS_URLS" = "";
       "TRUSTED_GATEWAY_URL" = "";
       "TRUSTED_NODE_URL" = "http://envoy:3000";
+      "TURBO_ENDPOINT" = "";
+      "TURBO_REQUEST_RETRY_COUNT" = "";
+      "TURBO_REQUEST_TIMEOUT_MS" = "";
+      "TURBO_ROOT_TX_RATE_LIMIT_BURST_SIZE" = "";
+      "TURBO_ROOT_TX_RATE_LIMIT_INTERVAL" = "";
+      "TURBO_ROOT_TX_RATE_LIMIT_TOKENS_PER_INTERVAL" = "";
+      "TX_FETCHER_WORKER_COUNT" = "";
+      "TX_METADATA_RESOLVE_CONCURRENCY" = "";
+      "UNTRUSTED_CACHE_RETRY_RATE" = "";
+      "UV_THREADPOOL_SIZE" = "";
+      "VERIFICATION_DATA_IMPORTER_QUEUE_SIZE" = "";
       "WEBHOOK_BLOCK_FILTER" = "";
+      "WEBHOOK_EMIT_DATA_CACHED_EVENTS" = "";
       "WEBHOOK_INDEX_FILTER" = "";
       "WEBHOOK_TARGET_SERVERS" = "";
       "WEIGHTED_PEERS_TEMPERATURE_DELTA" = "";
@@ -250,12 +439,16 @@
       "/opt/ario/data/contiguous:/app/data/contiguous:rw"
       "/opt/ario/data/datasets:/app/data/datasets:rw"
       "/opt/ario/data/duckdb:/app/data/duckdb:rw"
+      "/opt/ario/data/etl/staging:/app/data/etl/staging:rw"
       "/opt/ario/data/headers:/app/data/headers:rw"
+      "/opt/ario/data/keys:/app/data/keys:rw"
       "/opt/ario/data/lmdb:/app/data/lmdb:rw"
       "/opt/ario/data/parquet:/app/data/parquet:rw"
       "/opt/ario/data/sqlite:/app/data/sqlite:rw"
       "/opt/ario/data/tmp:/app/data/tmp:rw"
       "/opt/ario/secrets:/app/secrets:ro"
+      "/opt/ario/wallets:/app/wallets:ro"
+      "ario_envoy-eds-data:/app/data/envoy-eds:rw"
     ];
     ports = [
       "4000:4000/tcp"
@@ -270,6 +463,7 @@
     extraOptions = [
       "--network-alias=core"
       "--network=ar-io-network"
+      "--ulimit=nofile=65536"
     ];
   };
   systemd.services."docker-ario-core" = {
@@ -281,9 +475,11 @@
     };
     after = [
       "docker-network-ar-io-network.service"
+      "docker-volume-ario_envoy-eds-data.service"
     ];
     requires = [
       "docker-network-ar-io-network.service"
+      "docker-volume-ario_envoy-eds-data.service"
     ];
     partOf = [
       "docker-compose-ario-root.target"
@@ -293,24 +489,32 @@
     ];
   };
   virtualisation.oci-containers.containers."ario-envoy" = {
-    image = "ghcr.io/ar-io/ar-io-envoy:4755fa0a2deb258bfaeaa91ba3154f1f7ef41fda";
+    image = "ghcr.io/ar-io/ar-io-envoy:bd738a2435f1293e259dfcbb4ef42f50b26545da";
     environment = {
       "LOG_LEVEL" = "info";
+      "TVAL_ARIO_GATEWAY_UPSTREAM_IDLE_TIMEOUT" = "55s";
       "TVAL_ARNS_ROOT_HOST" = "";
+      "TVAL_ARWEAVE_PEER_DNS_PORT" = "1984";
+      "TVAL_ARWEAVE_PEER_DNS_RECORDS" = "peers.arweave.xyz";
       "TVAL_ARWEAVE_POST_DRY_RUN" = "false";
       "TVAL_AR_IO_HOST" = "core";
       "TVAL_AR_IO_PORT" = "4000";
       "TVAL_DATASETS_HOST" = "core";
       "TVAL_DATASETS_PORT" = "4000";
+      "TVAL_ENABLE_ARWEAVE_PEER_EDS" = "true";
       "TVAL_FALLBACK_NODE_HOST" = "peers.arweave.xyz";
       "TVAL_FALLBACK_NODE_PORT" = "1984";
       "TVAL_GRAPHQL_HOST" = "core";
+      "TVAL_GRAPHQL_HOST_HEADER" = "";
       "TVAL_GRAPHQL_PORT" = "4000";
       "TVAL_OBSERVER_HOST" = "observer";
       "TVAL_OBSERVER_PORT" = "5050";
       "TVAL_TRUSTED_NODE_HOST" = "arweave.net";
       "TVAL_TRUSTED_NODE_PORT" = "443";
     };
+    volumes = [
+      "ario_envoy-eds-data:/data/envoy-eds:rw"
+    ];
     ports = [
       "3000:3000/tcp"
     ];
@@ -322,6 +526,7 @@
     extraOptions = [
       "--network-alias=envoy"
       "--network=ar-io-network"
+      "--ulimit=nofile=65536"
     ];
   };
   systemd.services."docker-ario-envoy" = {
@@ -333,9 +538,11 @@
     };
     after = [
       "docker-network-ar-io-network.service"
+      "docker-volume-ario_envoy-eds-data.service"
     ];
     requires = [
       "docker-network-ar-io-network.service"
+      "docker-volume-ario_envoy-eds-data.service"
     ];
     partOf = [
       "docker-compose-ario-root.target"
@@ -345,23 +552,35 @@
     ];
   };
   virtualisation.oci-containers.containers."ario-observer" = {
-    image = "ghcr.io/ar-io/ar-io-observer:8fb7b2f71b28bc77810ead87560aa96042119b4b";
+    image = "ghcr.io/ar-io/ar-io-observer:308b6777d0df4a45f59a1984bcb0874a50f58965";
     environment = {
-      "AO_CU_URL" = "";
-      "AO_GATEWAY_URL" = "";
-      "AO_GRAPHQL_URL" = "";
-      "AO_MU_URL" = "";
-      "AR_IO_NODE_RELEASE" = "67";
+      "ARIO_ANT_PROGRAM_ID" = "2MWexMHfMhGJwMHv9Qm9YAVCqjUFUJwDJAysW4oCUGk5";
+      "ARIO_ARNS_PROGRAM_ID" = "2yCUx5edFvUrkibYaUa2ZXWyx9kuJkS8CwyzsgHPWdZZ";
+      "ARIO_CORE_PROGRAM_ID" = "73YoECm6NKXpVRoe5f1Q9BcP5DJGPFUjnFy6AxBE5Nvh";
+      "ARIO_GAR_PROGRAM_ID" = "89fNiiwgpFSPHKuqfNUkgYTYjtAJAhyqHjXmgXeppGpf";
+      "ARWEAVE_UPLOAD_JWK" = "";
+      "ARWEAVE_UPLOAD_KEY_FILE" = "";
+      "AR_IO_NODE_RELEASE" = "81";
       "AR_IO_SDK_LOG_LEVEL" = "none";
-      "IO_PROCESS_ID" = "";
+      "ENABLE_CLEANUP" = "";
+      "ENABLE_EPOCH_CRANKING" = "";
+      "ENABLE_LOG_REPORT_SINK" = "";
+      "ETHEREUM_UPLOAD_PRIVATE_KEY" = "";
+      "ETHEREUM_UPLOAD_PRIVATE_KEY_FILE" = "";
+      "GATEWAY_ASSESSMENT_CONCURRENCY" = "";
       "LOG_LEVEL" = "";
       "MAJORITY_VOTE_THRESHOLD" = "";
       "MIN_RELEASE_NUMBER" = "0";
-      "NETWORK_AO_CU_URL" = "";
+      "NAME_ASSESSMENT_CONCURRENCY" = "";
       "NUM_ARNS_NAMES_TO_OBSERVE_PER_GROUP" = "8";
       "OBSERVATIONS_PER_GATEWAY" = "";
       "OBSERVATION_CYCLE_INTERVAL_MS" = "";
+      "OBSERVATION_STABILITY_BUFFER_MS" = "";
+      "OBSERVATION_SUBMISSION_BUFFER_MS" = "";
       "OBSERVATION_WINDOW_FRACTION" = "";
+      "OBSERVER_KEYPAIR_PATH" = "";
+      "OBSERVER_MAX_GATEWAY_FAILURE_THRESHOLD" = "";
+      "OBSERVER_PRIVATE_KEY" = "";
       "OBSERVER_WALLET" = "";
       "OFFSET_OBSERVATION_ENABLED" = "";
       "OFFSET_OBSERVATION_ENFORCEMENT_ENABLED" = "";
@@ -380,6 +599,11 @@
       "REPORT_DATA_SINK" = "";
       "REPORT_GENERATION_INTERVAL_MS" = "";
       "RUN_OBSERVER" = "true";
+      "SOLANA_KEYPAIR_PATH" = "";
+      "SOLANA_PRIVATE_KEY" = "";
+      "SOLANA_RPC_URL" = "";
+      "SOLANA_UPLOAD_KEYPAIR_PATH" = "";
+      "SOLANA_UPLOAD_PRIVATE_KEY" = "";
       "SUBMIT_CONTRACT_INTERACTIONS" = "true";
       "TURBO_UPLOAD_SERVICE_URL" = "";
     };
@@ -469,6 +693,20 @@
     wantedBy = [ "docker-compose-ario-root.target" ];
   };
 
+  # Volumes
+  systemd.services."docker-volume-ario_envoy-eds-data" = {
+    path = [ pkgs.docker ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      docker volume inspect ario_envoy-eds-data || docker volume create ario_envoy-eds-data
+    '';
+    partOf = [ "docker-compose-ario-root.target" ];
+    wantedBy = [ "docker-compose-ario-root.target" ];
+  };
+
   # Builds
   systemd.services."docker-build-ario-core" = {
     path = [ pkgs.docker pkgs.git ];
@@ -478,7 +716,7 @@
     };
     script = ''
       cd /opt/ario
-      docker build -t ghcr.io/ar-io/ar-io-core:caab23ba8515873ae2a4e2e6ca2ed4d096498df3 .
+      docker build -t ghcr.io/ar-io/ar-io-core:f3032933c6039305bc5ecec0d486526c6d60d6ea .
     '';
   };
   systemd.services."docker-build-ario-envoy" = {
@@ -489,7 +727,7 @@
     };
     script = ''
       cd /opt/ario/envoy
-      docker build -t ghcr.io/ar-io/ar-io-envoy:4755fa0a2deb258bfaeaa91ba3154f1f7ef41fda .
+      docker build -t ghcr.io/ar-io/ar-io-envoy:bd738a2435f1293e259dfcbb4ef42f50b26545da .
     '';
   };
 
